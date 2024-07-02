@@ -19,6 +19,11 @@ while True:
 
     if opcao == "d":
         print("Depósito")
+        
+        saldo = float(input("R$ "))
+
+        if saldo<0 :
+            print("O saldo não pode negativo.")
     
     elif opcao == "s":
         print("Sacar")
@@ -26,7 +31,7 @@ while True:
     elif opcao == "e":
         print("Extrato")
     
-    elif opcao == "s":
+    elif opcao == "q":
         break
 
     else:
