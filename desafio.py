@@ -18,15 +18,25 @@ while True:
     opcao = input(menu).lower()
 
     if opcao == "d":
-        print("Depósito")
-        
-        saldo = float(input("R$ "))
+        saldo = float(input("Depósito\nR$ "))
 
         if saldo<0 :
             print("O saldo não pode negativo.")
     
     elif opcao == "s":
-        print("Sacar")
+        sacar = float(input("Sacar\nR$ "))
+
+        if numero_saques < LIMITE_SAQUES:
+            if saldo >= 0 and saldo >= sacar:
+                if sacar > 0 and sacar <= limite:
+                    saldo -= sacar
+                    numero_saques+=1
+                else:
+                    print("Não pode sacar 0 ou maior que 500 reais.")
+            else:
+                print("Não pode sacar")
+        else:
+            print("O numero de saques não pode ser maior que 3")
     
     elif opcao == "e":
         print("Extrato")
