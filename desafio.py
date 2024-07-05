@@ -10,14 +10,37 @@ def menu():
 => """
     return input(menu)
 
-def depositar(saldo, valor, extrato):
+def depositar(saldo, valor, extrato, /):
     if valor > 0 :
         saldo += valor
-        extrato += f"Deposito: R${valor:.2f}\n"
+        extrato += f"Deposito: R$ {valor:.2f}\n"
+        print("\nDeposito realizado com sucesso!")
     else:
         print("\nOperação falhou! O valor informado é invalido.")
 
     return saldo, extrato
+
+def sacar(* ,saldo, valor, extrato, limite, numero_saques, limite_saques):
+    exceder_saldo = valor > saldo
+    exceder_limite = valor > limite
+    exceder_saque = numero_saques > limite_saques
+    
+    if exceder_saldo:
+        print("Operação falho! Você não tem saldo suficiente.")
+    elif exceder_limite:
+        print("Operação falho! O valor do saque excedeu o limite.")
+    elif exceder_saque:
+        print("Operação falho! Número máximo de saques excedida.")
+    elif valor > 0:
+        saldo += valor
+        extrato += f"Saque: R$ {valor:.2f}"
+        numero_saques += 1
+        print("Saque realizado com sucesso!")
+    else:
+        print("Operação falhou| O valor informado é inválido.")
+    
+    return saldo, extrato
+    
 
 def main():
     saldo = 0
@@ -33,23 +56,18 @@ def main():
         if opcao == "d":
             valor = float(input("Depósito\nR$ "))
             
-            saldo , extrato = depositar(saldo, valor, extrato)
+            saldo, extrato = depositar(saldo, valor, extrato)
         elif opcao == "s":
-            sacar = float(input("Sacar\nR$ "))
-
-            if numero_saques < LIMITE_SAQUES:
-                if saldo >= 0 and saldo >= sacar:
-                    if sacar > 0 and sacar <= limite:
-                        saldo -= sacar
-                        numero_saques+=1
-
-                        extrato += f"Saque: R${sacar:.2f}\n"
-                    else:
-                        print("Não pode sacar 0 ou maior que 500 reais.")
-                else:
-                    print("Não pode sacar")
-            else:
-                print("O numero de saques não pode ser maior que 3")
+            valor = float(input("Saque\nR$ "))
+            
+            saldo, extrato = sacar(
+                saldo = saldo,
+                valor = valor,
+                extrato = extrato,
+                limite = limite,
+                numero_saques = numero_saques,
+                limite_saques = LIMITE_SAQUES,
+            )
     
         elif opcao == "e":
             print("Extrato: ")
