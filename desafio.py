@@ -10,12 +10,14 @@ def menu():
 => """
     return input(menu)
 
-def depositar(valor):
-    if valor<=0 :
-        print("O valor informado não pode ser menor ou igual a 0")
-        valor = 0
+def depositar(saldo, valor, extrato):
+    if valor > 0 :
+        saldo += valor
+        extrato += f"Deposito: R${valor:.2f}\n"
+    else:
+        print("\nOperação falhou! O valor informado é invalido.")
 
-    return valor
+    return saldo, extrato
 
 def main():
     saldo = 0
@@ -30,8 +32,8 @@ def main():
 
         if opcao == "d":
             valor = float(input("Depósito\nR$ "))
-            extrato += f"Depósito: R${valor:.2f}\n"
-            saldo += depositar(valor)
+            
+            saldo , extrato = depositar(saldo, valor, extrato)
         elif opcao == "s":
             sacar = float(input("Sacar\nR$ "))
 
