@@ -1,3 +1,10 @@
+def depositar(valor):
+    if valor<=0 :
+        print("O valor informado não pode ser menor ou igual a 0")
+        valor = 0
+
+    return valor
+
 menu = """
 
 [d] Depositar
@@ -22,11 +29,10 @@ while True:
         valor = float(input("Depósito\nR$ "))
 
         extrato += f"Depósito: R${valor:.2f}\n"
-        
-        saldo += valor
 
-        if saldo<0 :
-            print("O saldo não pode negativo.")
+        saldo += depositar(valor)
+
+        
     
     elif opcao == "s":
         sacar = float(input("Sacar\nR$ "))
