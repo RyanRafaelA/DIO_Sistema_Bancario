@@ -79,14 +79,26 @@ def nova_conta(agencia, numero_conta, usuarios):
     
     print("Usuario não encontrado, fluxo de criação de conta encerrado!")
 
+def listar_contas(contas):
+    for conta in contas:
+        linha = f"""
+Agencia: {conta["agencia"]}
+C/C: {conta["numero_conta"]}
+Titular: {conta["usuario"]["nome"]}
+"""
+        print("=" * 100)
+        print(linha)
+
 def main():
     saldo = 0
     limite= 500
     extrato = ""
     numero_saques = 0
     LIMITE_SAQUES = 3
+    AGENCIA = "0001"
     valor = 0
     usuarios = []
+    contas = []
 
     while True:
         opcao = menu()
@@ -114,7 +126,14 @@ def main():
             novo_usuario(usuarios)
             
         elif opcao == "nc":
-            nova_conta(agencia, numero_conta, usuarios)
+            numero_conta = len(contas) +1
+            conta = nova_conta(AGENCIA, numero_conta, usuarios)
+            
+            if conta:
+                contas.append(conta)
+                
+        elif opcao == "lc":
+            listar_contas(contas)
             
         elif opcao == "q":
             break
