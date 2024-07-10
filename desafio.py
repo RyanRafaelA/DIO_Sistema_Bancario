@@ -4,6 +4,7 @@ def menu():
 [d]  Depositar
 [s]  Sacar
 [e]  Extrato
+[nc] Nova Conta
 [lc] Listar Contas
 [nu] Novo Usuáiro
 [q]  Sair\n
@@ -68,6 +69,16 @@ def filtrar_usuario(cpf, usuarios):
     
     return usuario_filtrado[0] if usuario_filtrado else None
 
+def nova_conta(agencia, numero_conta, usuarios):
+    cpf = input("Informe o cpf do usuario: ")
+    usuario = filtrar_usuario(cpf, usuarios)
+    
+    if usuario:
+        print("Conta criada com sucesso!")
+        return {"agencia": agencia, "numero_conta": numero_conta, "usuario": usuario}
+    
+    print("Usuario não encontrado, fluxo de criação de conta encerrado!")
+
 def main():
     saldo = 0
     limite= 500
@@ -101,6 +112,9 @@ def main():
             
         elif opcao == "nu":
             novo_usuario(usuarios)
+            
+        elif opcao == "nc":
+            nova_conta(agencia, numero_conta, usuarios)
             
         elif opcao == "q":
             break
