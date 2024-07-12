@@ -52,17 +52,25 @@ class Conta:
         saldo = self.saldo
         
         if valor > saldo:
-            print("Operação falho! Você não tem saldo suficiente.")
-            
+            print("Operação falho! Você não tem saldo suficiente.")    
         elif valor > 0:
             self._saldo -= valor
             print("Saque realizado com sucesso!")
             return True
-        
         else:
             print("Operação falhou| O valor informado é inválido.")
         
         return False
+    
+    def despositar(self, valor):
+        if valor > 0:
+            self._saldo += valor
+            print("Depósito realizado com sucesso!")
+        else:
+            print("Operação falhou! O valor informado é inválido.")
+            return False
+        
+        return True
                 
 def menu():
     menu = """\n
@@ -76,16 +84,6 @@ def menu():
 [q]  Sair\n
 => """
     return input(menu)
-
-def depositar(saldo, valor, extrato, /):
-    if valor > 0 :
-        saldo += valor
-        extrato += f"Deposito: R$ {valor:.2f}\n"
-        print("\nDeposito realizado com sucesso!")
-    else:
-        print("\nOperação falhou! O valor informado é invalido.")
-
-    return saldo, extrato
 
 def extrato(saldo, /, *, extrato):
     print("\n==================EXTRATO==================")
