@@ -48,7 +48,21 @@ class Conta:
     def historico(self):
         return self._historico
     
-    
+    def sacar(self, valor):
+        saldo = self.saldo
+        
+        if valor > saldo:
+            print("Operação falho! Você não tem saldo suficiente.")
+            
+        elif valor > 0:
+            self._saldo -= valor
+            print("Saque realizado com sucesso!")
+            return True
+        
+        else:
+            print("Operação falhou| O valor informado é inválido.")
+        
+        return False
                 
 def menu():
     menu = """\n
