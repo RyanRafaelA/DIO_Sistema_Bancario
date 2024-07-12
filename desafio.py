@@ -146,6 +146,12 @@ class Depositar(Transacao):
     @property
     def valor(self):
         return self._valor
+    
+    def registrar(self, conta):
+        sucesso_transacao = conta.depositar(self.valor)
+        
+        if sucesso_transacao:
+            conta.historico.adicionar_transacao(self)
                
 def menu():
     menu = """\n
