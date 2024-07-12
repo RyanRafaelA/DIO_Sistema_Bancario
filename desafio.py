@@ -1,3 +1,8 @@
+class Cliente:
+    def __init__(self, endereco, contas):
+        self._endereco = endereco
+        self._contas.append(contas)
+
 def menu():
     menu = """\n
 ==================MENU==================
