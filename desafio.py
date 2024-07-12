@@ -77,6 +77,20 @@ class ContaCorrente(Conta):
         super().__init__(numero, cliente)
         self.limite = limite
         self.limite_saques = limite_saques
+        
+    def sacar(self, valor):
+        numero_saques = len([
+            transacao for transacao in self.historico.transacoes 
+            if transacao["tipo"] = Saque.__name__])
+        
+        if valor > self.limite:
+            print("Operação falhou! O valor do saque excede o limite.")
+        elif numero_saques >= self.limite_saques:
+            print("Operação falhor! Número máximo de saques excedido.")
+        else:
+            return super().sacar(valor)
+        
+        return False
                
 def menu():
     menu = """\n
