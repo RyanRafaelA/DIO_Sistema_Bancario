@@ -204,54 +204,27 @@ def nova_conta(agencia, numero_conta, usuarios):
     print("Usuario não encontrado, fluxo de criação de conta encerrado!")
 
 def main():
-    saldo = 0
-    limite= 500
-    extrato = ""
-    numero_saques = 0
-    LIMITE_SAQUES = 3
-    AGENCIA = "0001"
-    valor = 0
-    usuarios = []
+    clientes = []
     contas = []
 
     while True:
         opcao = menu()
 
         if opcao == "d":
-            valor = float(input("Depósito\nR$ "))
-            
-            saldo, extrato = depositar(saldo, valor, extrato)
+            depositar(clientes)
         elif opcao == "s":
-            valor = float(input("Saque\nR$ "))
-            
-            saldo, extrato = sacar(
-                saldo = saldo,
-                valor = valor,
-                extrato = extrato,
-                limite = limite,
-                numero_saques = numero_saques,
-                limite_saques = LIMITE_SAQUES,
-            )
-    
+            sacar(clientes)
         elif opcao == "e":
-            extrato(saldo, extrato = extrato)
-            
+            exibir_extrato(clientes)
         elif opcao == "nu":
-            novo_usuario(usuarios)
-            
+            criar_cliente(clientes) 
         elif opcao == "nc":
             numero_conta = len(contas) +1
-            conta = nova_conta(AGENCIA, numero_conta, usuarios)
-            
-            if conta:
-                contas.append(conta)
-                
+            criar_conta(numero_conta, clientes, contas)             
         elif opcao == "lc":
             listar_contas(contas)
-            
         elif opcao == "q":
             break
-
         else:
             print("Operação inválida, por favor selecione novamente a operação desejada.")
             
