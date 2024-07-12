@@ -1,3 +1,5 @@
+import datetime
+
 class Cliente:
     def __init__(self, endereco):
         self.endereco = endereco
@@ -98,6 +100,21 @@ Agencia: {self.agencia}
 C/C: {self.numero}
 Titular: {self.cliente.nome}
 """
+
+class Historico:
+    def __init__(self):
+        self._transacoes = []
+        
+    @property
+    def transacoes(self):
+        return self._transacoes
+    
+    def adicionar_transacao(self, transacao):
+        self._transacoes.append(
+            {"tipo": transacao.__class__.__name__,
+             "valor": transacao.valor,
+             "data": datetime.now().strftime("%d-%n-%Y %H:%M:%s"),}
+        )
                
 def menu():
     menu = """\n
@@ -148,16 +165,6 @@ def nova_conta(agencia, numero_conta, usuarios):
         return {"agencia": agencia, "numero_conta": numero_conta, "usuario": usuario}
     
     print("Usuario não encontrado, fluxo de criação de conta encerrado!")
-
-def listar_contas(contas):
-    for conta in contas:
-        linha = f"""
-Agencia: {conta["agencia"]}
-C/C: {conta["numero_conta"]}
-Titular: {conta["usuario"]["nome"]}
-"""
-        print("=" * 100)
-        print(linha)
 
 def main():
     saldo = 0
