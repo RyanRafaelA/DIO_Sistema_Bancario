@@ -138,6 +138,14 @@ class Saque(Transacao):
         
         if sucesso_transacao:
             conta.historico.adicionar_transacao(self)
+
+class Depositar(Transacao):
+    def __init__(self, valor):
+        self._valor = valor
+        
+    @property
+    def valor(self):
+        return self._valor
                
 def menu():
     menu = """\n
