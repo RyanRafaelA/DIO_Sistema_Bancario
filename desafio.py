@@ -1,3 +1,4 @@
+from abc import ABC, abstractmethod
 import datetime
 
 class Cliente:
@@ -115,6 +116,14 @@ class Historico:
              "valor": transacao.valor,
              "data": datetime.now().strftime("%d-%n-%Y %H:%M:%s"),}
         )
+        
+class Transacao(ABC):
+    @property
+    @abstractmethod
+    def valor(self): pass
+    
+    @abstractmethod
+    def registrar(self, conta): pass
                
 def menu():
     menu = """\n
