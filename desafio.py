@@ -15,6 +15,40 @@ class PessoaFisica(Cliente):
         self.nome = nome
         self.data_nascimento = data_nascimento
         self.cpf = cpf
+        
+class Conta:
+    def __init__(self, numero, cliente):
+        self._numero = numero
+        self._cliente = cliente
+        self._saldo = 0
+        self._agencia = "0001"
+        self._historico = Historico()
+        
+    @classmethod
+    def nova_conta(cls, cliente, numero):
+        return cls(numero, cliente)
+    
+    @property
+    def saldo(self):
+        return self._saldo
+    
+    @property
+    def numero(self):
+        return self._numero
+    
+    @property
+    def agencia(self):
+        return self._agencia
+    
+    @property
+    def cliente(self):
+        return self._cliente
+    
+    @property
+    def historico(self):
+        return self._historico
+    
+    
                 
 def menu():
     menu = """\n
@@ -37,27 +71,6 @@ def depositar(saldo, valor, extrato, /):
     else:
         print("\nOperação falhou! O valor informado é invalido.")
 
-    return saldo, extrato
-
-def sacar(* ,saldo, valor, extrato, limite, numero_saques, limite_saques):
-    exceder_saldo = valor > saldo
-    exceder_limite = valor > limite
-    exceder_saque = numero_saques > limite_saques
-    
-    if exceder_saldo:
-        print("Operação falho! Você não tem saldo suficiente.")
-    elif exceder_limite:
-        print("Operação falho! O valor do saque excedeu o limite.")
-    elif exceder_saque:
-        print("Operação falho! Número máximo de saques excedida.")
-    elif valor > 0:
-        saldo += valor
-        extrato += f"Saque: R$ {valor:.2f}"
-        numero_saques += 1
-        print("Saque realizado com sucesso!")
-    else:
-        print("Operação falhou| O valor informado é inválido.")
-    
     return saldo, extrato
 
 def extrato(saldo, /, *, extrato):
